@@ -1,0 +1,1926 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     71566,       1918]
+NotebookOptionsPosition[     66771,       1830]
+NotebookOutlinePosition[     67176,       1847]
+CellTagsIndexPosition[     67133,       1844]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"SetOptions", "[", 
+  RowBox[{
+   RowBox[{"SelectedNotebook", "[", "]"}], ",", 
+   RowBox[{"PrintingStyleEnvironment", "\[Rule]", "\"\<Printout\>\""}], ",", 
+   RowBox[{"ShowSyntaxStyles", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8588702619296265`*^9, 3.8588702619296265`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"acefd0e0-aec0-4ef1-b126-d7c0378947e2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", 
+    RowBox[{"x", ",", "t"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DiceFace", "=", "6"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRule", "=", "PrimeQ"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRoundMax", "=", "50"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Number of dice faces: \>\"", ",", "DiceFace"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Number of MAXIMAL hitting rounds: \>\"", ",", "HitRoundMax"}], "]"}],
+    ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+   "Print", "[", 
+    "\"\<NOTE: By setting the maximal hitting rounds to be 1000, the \
+expection in the 6-faced case in the paper of Alon-Malinovsky is \
+2.4284...\>\"", "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf1", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf2", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", "DiceFace"}], ",", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"HitRule", "[", "i", "]"}], ",", 
+       RowBox[{"gf1", "=", 
+        RowBox[{"gf1", "+", 
+         SuperscriptBox["x", "i"]}]}], ",", 
+       RowBox[{"gf2", "=", 
+        RowBox[{"gf2", "+", 
+         SuperscriptBox["x", "i"]}]}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GFInitial", "=", 
+   RowBox[{"gf1", "+", "gf2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"Append", "[", 
+     RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"HitRound", "=", "2"}], ",", 
+     RowBox[{"HitRound", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"HitRound", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"gf1", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf2", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf", "=", 
+       RowBox[{"Expand", "[", 
+        RowBox[{"GFInitial", "*", 
+         RowBox[{"GF2", "[", 
+          RowBox[{"[", 
+           RowBox[{"HitRound", "-", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "HitRound"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{"HitRound", "*", "DiceFace"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"HitRule", "[", "i", "]"}], ",", 
+           RowBox[{"gf1", "=", 
+            RowBox[{"gf1", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}], ",", 
+           RowBox[{"gf2", "=", 
+            RowBox[{"gf2", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}]}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF1", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF2", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HitExpectation", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", "=", "1"}], ",", 
+     RowBox[{"k", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HitExpectation", "=", 
+       RowBox[{"HitExpectation", "+", 
+        RowBox[{"k", "*", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           FractionBox["1", "DiceFace"], ")"}], "k"], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"GF1", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{"x", "\[Rule]", "1"}], "}"}]}], ")"}]}]}]}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Expected stopping round: \>\"", ",", 
+     RowBox[{"N", "[", 
+      RowBox[{"HitExpectation", ",", "50"}], "]"}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<log(DiceFace): \>\"", ",", 
+    RowBox[{"N", "[", 
+     RowBox[{
+      RowBox[{"Log", "[", "DiceFace", "]"}], ",", "10"}], "]"}]}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8947310301498785`*^9, 3.894731035740474*^9}, {
+   3.894731340440172*^9, 3.8947314623690395`*^9}, {3.8947315273242245`*^9, 
+   3.8947315348989105`*^9}, {3.8947315682555227`*^9, 3.894731715874343*^9}, {
+   3.8947318118940325`*^9, 3.8947320230400257`*^9}, {3.8947320532148027`*^9, 
+   3.8947322158025208`*^9}, {3.8947322524152317`*^9, 
+   3.8947322552773337`*^9}, {3.894732598444689*^9, 3.894732598884663*^9}, {
+   3.8947327483644624`*^9, 3.8947327516599035`*^9}, {3.894732792152816*^9, 
+   3.894732792552809*^9}, {3.894734281705374*^9, 3.89473428815142*^9}, {
+   3.894738618540986*^9, 3.8947386192045193`*^9}, {3.8949850609022655`*^9, 
+   3.894985061512225*^9}, {3.8964801733749743`*^9, 3.896480198702397*^9}, {
+   3.9068317542624345`*^9, 3.9068318490820274`*^9}, 3.9068361209825487`*^9, {
+   3.906836273763522*^9, 3.9068362741936226`*^9}, {3.9068367157711124`*^9, 
+   3.906836780352442*^9}, {3.9068368573898335`*^9, 3.906836859876113*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"7690e84e-de56-4002-bcd8-a31a5769d3d7"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of dice faces: \"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["Number of dice faces: ", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362289282727`*^9, 3.9068366665381317`*^9, 
+  3.9068368310978394`*^9, 3.9068369291005807`*^9},
+ CellLabel->
+  "During evaluation of \
+In[2]:=",ExpressionUUID->"a609f7b4-e362-4fde-8264-c928aab778ca"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of MAXIMAL hitting rounds: \"\>", "\[InvisibleSpace]", 
+   "50"}],
+  SequenceForm["Number of MAXIMAL hitting rounds: ", 50],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362289282727`*^9, 3.9068366665381317`*^9, 
+  3.9068368310978394`*^9, 3.9068369291205807`*^9},
+ CellLabel->
+  "During evaluation of \
+In[2]:=",ExpressionUUID->"c20d35e5-c3cf-4703-82ca-837ce8dd2eb3"],
+
+Cell[BoxData["\<\"NOTE: By setting the maximal hitting rounds to be 1000, the \
+expection in the 6-faced case in the paper of Alon-Malinovsky is \
+2.4284...\"\>"], "Print",
+ CellChangeTimes->{3.9068362289282727`*^9, 3.9068366665381317`*^9, 
+  3.9068368310978394`*^9, 3.9068369291305785`*^9},
+ CellLabel->
+  "During evaluation of \
+In[2]:=",ExpressionUUID->"814a2503-ac98-45bc-8743-9925680eaa44"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Expected stopping round: \"\>", "\[InvisibleSpace]", 
+   "2.428438056502905415192437877817440077716943701620007367005848692333569886\
+64145`50."}],
+  SequenceForm[
+  "Expected stopping round: ", 
+   2.4284380565029054151924378778174400777169437016200073670058486923335698866\
+4145`50.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362289282727`*^9, 3.9068366665381317`*^9, 
+  3.9068368310978394`*^9, 3.9068369297005463`*^9},
+ CellLabel->
+  "During evaluation of \
+In[2]:=",ExpressionUUID->"dec0ca4b-3f1e-400f-8857-bc862fb8dbbc"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"log(DiceFace): \"\>", "\[InvisibleSpace]", 
+   "1.79175946922805500081247735838070227272`10."}],
+  SequenceForm[
+  "log(DiceFace): ", 1.79175946922805500081247735838070227272`10.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362289282727`*^9, 3.9068366665381317`*^9, 
+  3.9068368310978394`*^9, 3.9068369297005463`*^9},
+ CellLabel->
+  "During evaluation of \
+In[2]:=",ExpressionUUID->"d02a0bdb-2371-41c4-804a-39a716f104eb"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", 
+    RowBox[{"x", ",", "t"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DiceFace", "=", "10"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRule", "=", "PrimeQ"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRoundMax", "=", "50"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Number of dice faces: \>\"", ",", "DiceFace"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Number of MAXIMAL hitting rounds: \>\"", ",", "HitRoundMax"}], "]"}],
+    ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf1", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf2", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", "DiceFace"}], ",", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"HitRule", "[", "i", "]"}], ",", 
+       RowBox[{"gf1", "=", 
+        RowBox[{"gf1", "+", 
+         SuperscriptBox["x", "i"]}]}], ",", 
+       RowBox[{"gf2", "=", 
+        RowBox[{"gf2", "+", 
+         SuperscriptBox["x", "i"]}]}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GFInitial", "=", 
+   RowBox[{"gf1", "+", "gf2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"Append", "[", 
+     RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"HitRound", "=", "2"}], ",", 
+     RowBox[{"HitRound", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"HitRound", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"gf1", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf2", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf", "=", 
+       RowBox[{"Expand", "[", 
+        RowBox[{"GFInitial", "*", 
+         RowBox[{"GF2", "[", 
+          RowBox[{"[", 
+           RowBox[{"HitRound", "-", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "HitRound"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{"HitRound", "*", "DiceFace"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"HitRule", "[", "i", "]"}], ",", 
+           RowBox[{"gf1", "=", 
+            RowBox[{"gf1", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}], ",", 
+           RowBox[{"gf2", "=", 
+            RowBox[{"gf2", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}]}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF1", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF2", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HitExpectation", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", "=", "1"}], ",", 
+     RowBox[{"k", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HitExpectation", "=", 
+       RowBox[{"HitExpectation", "+", 
+        RowBox[{"k", "*", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           FractionBox["1", "DiceFace"], ")"}], "k"], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"GF1", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{"x", "\[Rule]", "1"}], "}"}]}], ")"}]}]}]}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Expected stopping round: \>\"", ",", 
+     RowBox[{"N", "[", 
+      RowBox[{"HitExpectation", ",", "50"}], "]"}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<log(DiceFace): \>\"", ",", 
+    RowBox[{"N", "[", 
+     RowBox[{
+      RowBox[{"Log", "[", "DiceFace", "]"}], ",", "10"}], "]"}]}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8947310301498785`*^9, 3.894731035740474*^9}, {
+   3.894731340440172*^9, 3.8947314623690395`*^9}, {3.8947315273242245`*^9, 
+   3.8947315348989105`*^9}, {3.8947315682555227`*^9, 3.894731715874343*^9}, {
+   3.8947318118940325`*^9, 3.8947320230400257`*^9}, {3.8947320532148027`*^9, 
+   3.8947322158025208`*^9}, {3.8947322524152317`*^9, 
+   3.8947322552773337`*^9}, {3.894732598444689*^9, 3.894732598884663*^9}, {
+   3.8947327483644624`*^9, 3.8947327516599035`*^9}, {3.894732792152816*^9, 
+   3.894732792552809*^9}, {3.894734281705374*^9, 3.89473428815142*^9}, {
+   3.894738618540986*^9, 3.8947386192045193`*^9}, {3.8949850609022655`*^9, 
+   3.894985061512225*^9}, {3.8964801733749743`*^9, 3.896480198702397*^9}, {
+   3.9068317542624345`*^9, 3.9068318490820274`*^9}, {3.9068361306090727`*^9, 
+   3.9068362254975724`*^9}, {3.9068362653930497`*^9, 3.9068362659629965`*^9}, 
+   3.906836790683111*^9, 3.906836868143589*^9},
+ CellLabel->"In[22]:=",ExpressionUUID->"20654e72-8470-4616-bbb5-4efb2841f7e4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of dice faces: \"\>", "\[InvisibleSpace]", "10"}],
+  SequenceForm["Number of dice faces: ", 10],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068318542576413`*^9, 3.906836229428406*^9, 
+  3.906836667018102*^9, 3.906836831697798*^9, 3.9068369297305436`*^9},
+ CellLabel->
+  "During evaluation of \
+In[22]:=",ExpressionUUID->"d98e3721-780c-47c5-a320-72eb279462c0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of MAXIMAL hitting rounds: \"\>", "\[InvisibleSpace]", 
+   "50"}],
+  SequenceForm["Number of MAXIMAL hitting rounds: ", 50],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068318542576413`*^9, 3.906836229428406*^9, 
+  3.906836667018102*^9, 3.906836831697798*^9, 3.9068369297405405`*^9},
+ CellLabel->
+  "During evaluation of \
+In[22]:=",ExpressionUUID->"ae8f290f-1893-4fe1-b7ca-947ca435de72"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Expected stopping round: \"\>", "\[InvisibleSpace]", 
+   "2.9711376392109133291448749288403453477385067339688`50."}],
+  SequenceForm[
+  "Expected stopping round: ", 
+   2.9711376392109133291448749288403453477385067339688`50.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068318542576413`*^9, 3.906836229428406*^9, 
+  3.906836667018102*^9, 3.906836831697798*^9, 3.9068369318209543`*^9},
+ CellLabel->
+  "During evaluation of \
+In[22]:=",ExpressionUUID->"9fdeb802-bb32-40b4-8098-690414e7e8e6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"log(DiceFace): \"\>", "\[InvisibleSpace]", 
+   "2.3025850929940456840179914546843642076`10."}],
+  SequenceForm["log(DiceFace): ", 2.3025850929940456840179914546843642076`10.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068318542576413`*^9, 3.906836229428406*^9, 
+  3.906836667018102*^9, 3.906836831697798*^9, 3.9068369318309517`*^9},
+ CellLabel->
+  "During evaluation of \
+In[22]:=",ExpressionUUID->"f6b72728-c159-445a-9f0d-006cd8cdf42b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", 
+    RowBox[{"x", ",", "t"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DiceFace", "=", "20"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRule", "=", "PrimeQ"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRoundMax", "=", "50"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Number of dice faces: \>\"", ",", "DiceFace"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Number of MAXIMAL hitting rounds: \>\"", ",", "HitRoundMax"}], "]"}],
+    ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf1", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf2", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", "DiceFace"}], ",", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"HitRule", "[", "i", "]"}], ",", 
+       RowBox[{"gf1", "=", 
+        RowBox[{"gf1", "+", 
+         SuperscriptBox["x", "i"]}]}], ",", 
+       RowBox[{"gf2", "=", 
+        RowBox[{"gf2", "+", 
+         SuperscriptBox["x", "i"]}]}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GFInitial", "=", 
+   RowBox[{"gf1", "+", "gf2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"Append", "[", 
+     RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"HitRound", "=", "2"}], ",", 
+     RowBox[{"HitRound", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"HitRound", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"gf1", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf2", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf", "=", 
+       RowBox[{"Expand", "[", 
+        RowBox[{"GFInitial", "*", 
+         RowBox[{"GF2", "[", 
+          RowBox[{"[", 
+           RowBox[{"HitRound", "-", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "HitRound"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{"HitRound", "*", "DiceFace"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"HitRule", "[", "i", "]"}], ",", 
+           RowBox[{"gf1", "=", 
+            RowBox[{"gf1", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}], ",", 
+           RowBox[{"gf2", "=", 
+            RowBox[{"gf2", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}]}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF1", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF2", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HitExpectation", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", "=", "1"}], ",", 
+     RowBox[{"k", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HitExpectation", "=", 
+       RowBox[{"HitExpectation", "+", 
+        RowBox[{"k", "*", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           FractionBox["1", "DiceFace"], ")"}], "k"], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"GF1", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{"x", "\[Rule]", "1"}], "}"}]}], ")"}]}]}]}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Expected stopping round: \>\"", ",", 
+     RowBox[{"N", "[", 
+      RowBox[{"HitExpectation", ",", "50"}], "]"}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<log(DiceFace): \>\"", ",", 
+    RowBox[{"N", "[", 
+     RowBox[{
+      RowBox[{"Log", "[", "DiceFace", "]"}], ",", "10"}], "]"}]}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8947310301498785`*^9, 3.894731035740474*^9}, {
+   3.894731340440172*^9, 3.8947314623690395`*^9}, {3.8947315273242245`*^9, 
+   3.8947315348989105`*^9}, {3.8947315682555227`*^9, 3.894731715874343*^9}, {
+   3.8947318118940325`*^9, 3.8947320230400257`*^9}, {3.8947320532148027`*^9, 
+   3.8947322158025208`*^9}, {3.8947322524152317`*^9, 
+   3.8947322552773337`*^9}, {3.894732598444689*^9, 3.894732598884663*^9}, {
+   3.8947327483644624`*^9, 3.8947327516599035`*^9}, {3.894732792152816*^9, 
+   3.894732792552809*^9}, {3.894734281705374*^9, 3.89473428815142*^9}, {
+   3.894738618540986*^9, 3.8947386192045193`*^9}, {3.8949850609022655`*^9, 
+   3.894985061512225*^9}, {3.8964801733749743`*^9, 3.896480198702397*^9}, {
+   3.8964802808148665`*^9, 3.896480280924858*^9}, {3.9068318789335356`*^9, 
+   3.9068318920643992`*^9}, 3.906836797163589*^9, 3.906836873084486*^9},
+ CellLabel->"In[41]:=",ExpressionUUID->"31582b4a-10b9-4c5e-93f3-8be7a38d6f08"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of dice faces: \"\>", "\[InvisibleSpace]", "20"}],
+  SequenceForm["Number of dice faces: ", 20],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362310213785`*^9, 3.90683666853827*^9, 
+  3.9068368337678976`*^9, 3.9068369318709526`*^9},
+ CellLabel->
+  "During evaluation of \
+In[41]:=",ExpressionUUID->"08b6f05f-4b1b-4576-adc1-20674fd29a83"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of MAXIMAL hitting rounds: \"\>", "\[InvisibleSpace]", 
+   "50"}],
+  SequenceForm["Number of MAXIMAL hitting rounds: ", 50],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362310213785`*^9, 3.90683666853827*^9, 
+  3.9068368337678976`*^9, 3.9068369318809485`*^9},
+ CellLabel->
+  "During evaluation of \
+In[41]:=",ExpressionUUID->"5b9fdd4c-5756-4bfa-b43f-845ba8ca8b34"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Expected stopping round: \"\>", "\[InvisibleSpace]", 
+   "3.470793627922148526870439291609308694627198710560428866008492258110607053\
+82261`50."}],
+  SequenceForm[
+  "Expected stopping round: ", 
+   3.4707936279221485268704392916093086946271987105604288660084922581106070538\
+2261`50.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362310213785`*^9, 3.90683666853827*^9, 
+  3.9068368337678976`*^9, 3.906836940694248*^9},
+ CellLabel->
+  "During evaluation of \
+In[41]:=",ExpressionUUID->"10c9eac6-99fb-4a08-87ca-4cd2c16dc748"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"log(DiceFace): \"\>", "\[InvisibleSpace]", 
+   "2.99573227355399099341081922687202165889`10."}],
+  SequenceForm[
+  "log(DiceFace): ", 2.99573227355399099341081922687202165889`10.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362310213785`*^9, 3.90683666853827*^9, 
+  3.9068368337678976`*^9, 3.906836940694248*^9},
+ CellLabel->
+  "During evaluation of \
+In[41]:=",ExpressionUUID->"1a1e081e-1c32-4054-8d8d-a559cb9994c3"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", 
+    RowBox[{"x", ",", "t"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DiceFace", "=", "50"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRule", "=", "PrimeQ"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRoundMax", "=", "50"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Number of dice faces: \>\"", ",", "DiceFace"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Number of MAXIMAL hitting rounds: \>\"", ",", "HitRoundMax"}], "]"}],
+    ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf1", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf2", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", "DiceFace"}], ",", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"HitRule", "[", "i", "]"}], ",", 
+       RowBox[{"gf1", "=", 
+        RowBox[{"gf1", "+", 
+         SuperscriptBox["x", "i"]}]}], ",", 
+       RowBox[{"gf2", "=", 
+        RowBox[{"gf2", "+", 
+         SuperscriptBox["x", "i"]}]}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GFInitial", "=", 
+   RowBox[{"gf1", "+", "gf2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"Append", "[", 
+     RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"HitRound", "=", "2"}], ",", 
+     RowBox[{"HitRound", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"HitRound", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"gf1", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf2", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf", "=", 
+       RowBox[{"Expand", "[", 
+        RowBox[{"GFInitial", "*", 
+         RowBox[{"GF2", "[", 
+          RowBox[{"[", 
+           RowBox[{"HitRound", "-", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "HitRound"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{"HitRound", "*", "DiceFace"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"HitRule", "[", "i", "]"}], ",", 
+           RowBox[{"gf1", "=", 
+            RowBox[{"gf1", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}], ",", 
+           RowBox[{"gf2", "=", 
+            RowBox[{"gf2", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}]}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF1", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF2", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HitExpectation", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", "=", "1"}], ",", 
+     RowBox[{"k", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HitExpectation", "=", 
+       RowBox[{"HitExpectation", "+", 
+        RowBox[{"k", "*", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           FractionBox["1", "DiceFace"], ")"}], "k"], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"GF1", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{"x", "\[Rule]", "1"}], "}"}]}], ")"}]}]}]}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Expected stopping round: \>\"", ",", 
+     RowBox[{"N", "[", 
+      RowBox[{"HitExpectation", ",", "50"}], "]"}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<log(DiceFace): \>\"", ",", 
+    RowBox[{"N", "[", 
+     RowBox[{
+      RowBox[{"Log", "[", "DiceFace", "]"}], ",", "10"}], "]"}]}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8947310301498785`*^9, 3.894731035740474*^9}, {
+   3.894731340440172*^9, 3.8947314623690395`*^9}, {3.8947315273242245`*^9, 
+   3.8947315348989105`*^9}, {3.8947315682555227`*^9, 3.894731715874343*^9}, {
+   3.8947318118940325`*^9, 3.8947320230400257`*^9}, {3.8947320532148027`*^9, 
+   3.8947322158025208`*^9}, {3.8947322524152317`*^9, 
+   3.8947322552773337`*^9}, {3.894732598444689*^9, 3.894732598884663*^9}, {
+   3.8947327483644624`*^9, 3.8947327516599035`*^9}, {3.894732792152816*^9, 
+   3.894732792552809*^9}, {3.894734281705374*^9, 3.89473428815142*^9}, {
+   3.894738618540986*^9, 3.8947386192045193`*^9}, {3.8949850609022655`*^9, 
+   3.894985061512225*^9}, {3.8964801733749743`*^9, 3.896480198702397*^9}, {
+   3.8964802808148665`*^9, 3.896480280924858*^9}, {3.896480323190375*^9, 
+   3.896480323405067*^9}, {3.9068319003388567`*^9, 3.9068319007188325`*^9}, 
+   3.906836802173487*^9, 3.906836879812607*^9},
+ CellLabel->"In[60]:=",ExpressionUUID->"7e92f6c5-26dc-4e28-8b94-fd9a43c90a60"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of dice faces: \"\>", "\[InvisibleSpace]", "50"}],
+  SequenceForm["Number of dice faces: ", 50],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362376186523`*^9, 3.906836675038702*^9, 
+  3.9068368427818947`*^9, 3.9068369407542315`*^9},
+ CellLabel->
+  "During evaluation of \
+In[60]:=",ExpressionUUID->"a2ee2ed7-8aa2-4ab8-947e-0b3b20e3aacd"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of MAXIMAL hitting rounds: \"\>", "\[InvisibleSpace]", 
+   "50"}],
+  SequenceForm["Number of MAXIMAL hitting rounds: ", 50],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362376186523`*^9, 3.906836675038702*^9, 
+  3.9068368427818947`*^9, 3.9068369407542315`*^9},
+ CellLabel->
+  "During evaluation of \
+In[60]:=",ExpressionUUID->"5e881577-5724-4f15-a3d0-67cd8344d70e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Expected stopping round: \"\>", "\[InvisibleSpace]", 
+   "4.512911681373356324123998255473315049906473467629307552473295577007313692\
+58989`50."}],
+  SequenceForm[
+  "Expected stopping round: ", 
+   4.5129116813733563241239982554733150499064734676293075524732955770073136925\
+8989`50.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362376186523`*^9, 3.906836675038702*^9, 
+  3.9068368427818947`*^9, 3.906836983857106*^9},
+ CellLabel->
+  "During evaluation of \
+In[60]:=",ExpressionUUID->"9680af3a-a835-400f-a1d8-d149a982b27e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"log(DiceFace): \"\>", "\[InvisibleSpace]", 
+   "3.91202300542814605864398724843766785852`10."}],
+  SequenceForm[
+  "log(DiceFace): ", 3.91202300542814605864398724843766785852`10.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068362376186523`*^9, 3.906836675038702*^9, 
+  3.9068368427818947`*^9, 3.906836983857106*^9},
+ CellLabel->
+  "During evaluation of \
+In[60]:=",ExpressionUUID->"63346d10-1485-4ea9-bb8c-2e81997fd9db"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", 
+    RowBox[{"x", ",", "t"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DiceFace", "=", "100"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRule", "=", "PrimeQ"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRoundMax", "=", "50"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Number of dice faces: \>\"", ",", "DiceFace"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Number of MAXIMAL hitting rounds: \>\"", ",", "HitRoundMax"}], "]"}],
+    ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf1", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf2", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", "DiceFace"}], ",", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"HitRule", "[", "i", "]"}], ",", 
+       RowBox[{"gf1", "=", 
+        RowBox[{"gf1", "+", 
+         SuperscriptBox["x", "i"]}]}], ",", 
+       RowBox[{"gf2", "=", 
+        RowBox[{"gf2", "+", 
+         SuperscriptBox["x", "i"]}]}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GFInitial", "=", 
+   RowBox[{"gf1", "+", "gf2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"Append", "[", 
+     RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"HitRound", "=", "2"}], ",", 
+     RowBox[{"HitRound", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"HitRound", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"gf1", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf2", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf", "=", 
+       RowBox[{"Expand", "[", 
+        RowBox[{"GFInitial", "*", 
+         RowBox[{"GF2", "[", 
+          RowBox[{"[", 
+           RowBox[{"HitRound", "-", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "HitRound"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{"HitRound", "*", "DiceFace"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"HitRule", "[", "i", "]"}], ",", 
+           RowBox[{"gf1", "=", 
+            RowBox[{"gf1", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}], ",", 
+           RowBox[{"gf2", "=", 
+            RowBox[{"gf2", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}]}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF1", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF2", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HitExpectation", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", "=", "1"}], ",", 
+     RowBox[{"k", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HitExpectation", "=", 
+       RowBox[{"HitExpectation", "+", 
+        RowBox[{"k", "*", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           FractionBox["1", "DiceFace"], ")"}], "k"], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"GF1", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{"x", "\[Rule]", "1"}], "}"}]}], ")"}]}]}]}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Expected stopping round: \>\"", ",", 
+     RowBox[{"N", "[", 
+      RowBox[{"HitExpectation", ",", "50"}], "]"}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<log(DiceFace): \>\"", ",", 
+    RowBox[{"N", "[", 
+     RowBox[{
+      RowBox[{"Log", "[", "DiceFace", "]"}], ",", "10"}], "]"}]}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8947310301498785`*^9, 3.894731035740474*^9}, {
+   3.894731340440172*^9, 3.8947314623690395`*^9}, {3.8947315273242245`*^9, 
+   3.8947315348989105`*^9}, {3.8947315682555227`*^9, 3.894731715874343*^9}, {
+   3.8947318118940325`*^9, 3.8947320230400257`*^9}, {3.8947320532148027`*^9, 
+   3.8947322158025208`*^9}, {3.8947322524152317`*^9, 
+   3.8947322552773337`*^9}, {3.894732598444689*^9, 3.894732598884663*^9}, {
+   3.8947327483644624`*^9, 3.8947327516599035`*^9}, {3.894732792152816*^9, 
+   3.894732792552809*^9}, {3.894734281705374*^9, 3.89473428815142*^9}, {
+   3.894738618540986*^9, 3.8947386192045193`*^9}, {3.8949850609022655`*^9, 
+   3.894985061512225*^9}, {3.8964801733749743`*^9, 3.896480198702397*^9}, {
+   3.8964802808148665`*^9, 3.896480280924858*^9}, {3.896480337955823*^9, 
+   3.8964803383581524`*^9}, {3.906831909427212*^9, 3.906831909867203*^9}, 
+   3.9068368135249205`*^9, 3.9068368921297383`*^9},
+ CellLabel->"In[79]:=",ExpressionUUID->"5d947b78-bca5-42fe-af70-07496aa7ece9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of dice faces: \"\>", "\[InvisibleSpace]", "100"}],
+  SequenceForm["Number of dice faces: ", 100],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068369838971105`*^9},
+ CellLabel->
+  "During evaluation of \
+In[79]:=",ExpressionUUID->"5b8d292f-e07a-4bb1-b826-07b4c124fea2"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of MAXIMAL hitting rounds: \"\>", "\[InvisibleSpace]", 
+   "50"}],
+  SequenceForm["Number of MAXIMAL hitting rounds: ", 50],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068369839071054`*^9},
+ CellLabel->
+  "During evaluation of \
+In[79]:=",ExpressionUUID->"ec2fcda6-abc1-4c60-b27e-ec5e0035daea"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Expected stopping round: \"\>", "\[InvisibleSpace]", 
+   "5.272527324829488502165308235443872602396648690330020926858276946525654806\
+83759`50."}],
+  SequenceForm[
+  "Expected stopping round: ", 
+   5.2725273248294885021653082354438726023966486903300209268582769465256548068\
+3759`50.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068371622057915`*^9},
+ CellLabel->
+  "During evaluation of \
+In[79]:=",ExpressionUUID->"d0a6f6c2-b81a-4601-a50a-ab0f6cfd6c11"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"log(DiceFace): \"\>", "\[InvisibleSpace]", 
+   "4.605170185988091368`10."}],
+  SequenceForm["log(DiceFace): ", 4.605170185988091368`10.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068371622157736`*^9},
+ CellLabel->
+  "During evaluation of \
+In[79]:=",ExpressionUUID->"434d5f48-de60-4154-a2a6-818a37f08af9"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", 
+    RowBox[{"x", ",", "t"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DiceFace", "=", "200"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRule", "=", "PrimeQ"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRoundMax", "=", "50"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Number of dice faces: \>\"", ",", "DiceFace"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Number of MAXIMAL hitting rounds: \>\"", ",", "HitRoundMax"}], "]"}],
+    ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf1", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf2", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", "DiceFace"}], ",", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"HitRule", "[", "i", "]"}], ",", 
+       RowBox[{"gf1", "=", 
+        RowBox[{"gf1", "+", 
+         SuperscriptBox["x", "i"]}]}], ",", 
+       RowBox[{"gf2", "=", 
+        RowBox[{"gf2", "+", 
+         SuperscriptBox["x", "i"]}]}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GFInitial", "=", 
+   RowBox[{"gf1", "+", "gf2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"Append", "[", 
+     RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"HitRound", "=", "2"}], ",", 
+     RowBox[{"HitRound", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"HitRound", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"gf1", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf2", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf", "=", 
+       RowBox[{"Expand", "[", 
+        RowBox[{"GFInitial", "*", 
+         RowBox[{"GF2", "[", 
+          RowBox[{"[", 
+           RowBox[{"HitRound", "-", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "HitRound"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{"HitRound", "*", "DiceFace"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"HitRule", "[", "i", "]"}], ",", 
+           RowBox[{"gf1", "=", 
+            RowBox[{"gf1", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}], ",", 
+           RowBox[{"gf2", "=", 
+            RowBox[{"gf2", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}]}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF1", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF2", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HitExpectation", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", "=", "1"}], ",", 
+     RowBox[{"k", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HitExpectation", "=", 
+       RowBox[{"HitExpectation", "+", 
+        RowBox[{"k", "*", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           FractionBox["1", "DiceFace"], ")"}], "k"], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"GF1", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{"x", "\[Rule]", "1"}], "}"}]}], ")"}]}]}]}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Expected stopping round: \>\"", ",", 
+     RowBox[{"N", "[", 
+      RowBox[{"HitExpectation", ",", "50"}], "]"}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<log(DiceFace): \>\"", ",", 
+    RowBox[{"N", "[", 
+     RowBox[{
+      RowBox[{"Log", "[", "DiceFace", "]"}], ",", "10"}], "]"}]}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8947310301498785`*^9, 3.894731035740474*^9}, {
+   3.894731340440172*^9, 3.8947314623690395`*^9}, {3.8947315273242245`*^9, 
+   3.8947315348989105`*^9}, {3.8947315682555227`*^9, 3.894731715874343*^9}, {
+   3.8947318118940325`*^9, 3.8947320230400257`*^9}, {3.8947320532148027`*^9, 
+   3.8947322158025208`*^9}, {3.8947322524152317`*^9, 
+   3.8947322552773337`*^9}, {3.894732598444689*^9, 3.894732598884663*^9}, {
+   3.8947327483644624`*^9, 3.8947327516599035`*^9}, {3.894732792152816*^9, 
+   3.894732792552809*^9}, {3.894734281705374*^9, 3.89473428815142*^9}, {
+   3.894738618540986*^9, 3.8947386192045193`*^9}, {3.8949850609022655`*^9, 
+   3.894985061512225*^9}, {3.8964801733749743`*^9, 3.896480198702397*^9}, {
+   3.8964802808148665`*^9, 3.896480280924858*^9}, {3.8964803496159325`*^9, 
+   3.89648035001591*^9}, {3.9068319143352327`*^9, 3.906831914735225*^9}, 
+   3.906836818466375*^9, 3.9068368974262004`*^9},
+ CellLabel->"In[98]:=",ExpressionUUID->"dae7ca11-611e-4950-b8e5-ebe5d14f07d4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of dice faces: \"\>", "\[InvisibleSpace]", "200"}],
+  SequenceForm["Number of dice faces: ", 200],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.906837162255771*^9},
+ CellLabel->
+  "During evaluation of \
+In[98]:=",ExpressionUUID->"3745b311-3936-443c-8360-7e5aa0f05fa9"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of MAXIMAL hitting rounds: \"\>", "\[InvisibleSpace]", 
+   "50"}],
+  SequenceForm["Number of MAXIMAL hitting rounds: ", 50],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.906837162255771*^9},
+ CellLabel->
+  "During evaluation of \
+In[98]:=",ExpressionUUID->"f2acbf70-f0cd-46fd-8996-7b545d966839"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Expected stopping round: \"\>", "\[InvisibleSpace]", 
+   "5.916393368999140535816760869955105473485577620008355643974595744838890584\
+4666`50."}],
+  SequenceForm[
+  "Expected stopping round: ", 
+   5.9163933689991405358167608699551054734855776200083556439745957448388905844\
+666`50.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.906837870308231*^9},
+ CellLabel->
+  "During evaluation of \
+In[98]:=",ExpressionUUID->"3dc62e8e-c5c2-4eaa-98c4-09f9346b3a3d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"log(DiceFace): \"\>", "\[InvisibleSpace]", 
+   "5.2983173665480366774`10."}],
+  SequenceForm["log(DiceFace): ", 5.2983173665480366774`10.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.906837870308231*^9},
+ CellLabel->
+  "During evaluation of \
+In[98]:=",ExpressionUUID->"c5c697b5-3353-41d8-86e4-c1d09ac964f5"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", 
+    RowBox[{"x", ",", "t"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DiceFace", "=", "500"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRule", "=", "PrimeQ"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRoundMax", "=", "50"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Number of dice faces: \>\"", ",", "DiceFace"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Number of MAXIMAL hitting rounds: \>\"", ",", "HitRoundMax"}], "]"}],
+    ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf1", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf2", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", "DiceFace"}], ",", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"HitRule", "[", "i", "]"}], ",", 
+       RowBox[{"gf1", "=", 
+        RowBox[{"gf1", "+", 
+         SuperscriptBox["x", "i"]}]}], ",", 
+       RowBox[{"gf2", "=", 
+        RowBox[{"gf2", "+", 
+         SuperscriptBox["x", "i"]}]}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GFInitial", "=", 
+   RowBox[{"gf1", "+", "gf2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"Append", "[", 
+     RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"HitRound", "=", "2"}], ",", 
+     RowBox[{"HitRound", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"HitRound", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"gf1", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf2", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf", "=", 
+       RowBox[{"Expand", "[", 
+        RowBox[{"GFInitial", "*", 
+         RowBox[{"GF2", "[", 
+          RowBox[{"[", 
+           RowBox[{"HitRound", "-", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "HitRound"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{"HitRound", "*", "DiceFace"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"HitRule", "[", "i", "]"}], ",", 
+           RowBox[{"gf1", "=", 
+            RowBox[{"gf1", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}], ",", 
+           RowBox[{"gf2", "=", 
+            RowBox[{"gf2", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}]}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF1", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF2", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HitExpectation", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", "=", "1"}], ",", 
+     RowBox[{"k", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HitExpectation", "=", 
+       RowBox[{"HitExpectation", "+", 
+        RowBox[{"k", "*", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           FractionBox["1", "DiceFace"], ")"}], "k"], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"GF1", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{"x", "\[Rule]", "1"}], "}"}]}], ")"}]}]}]}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Expected stopping round: \>\"", ",", 
+     RowBox[{"N", "[", 
+      RowBox[{"HitExpectation", ",", "50"}], "]"}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<log(DiceFace): \>\"", ",", 
+    RowBox[{"N", "[", 
+     RowBox[{
+      RowBox[{"Log", "[", "DiceFace", "]"}], ",", "10"}], "]"}]}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8947310301498785`*^9, 3.894731035740474*^9}, {
+   3.894731340440172*^9, 3.8947314623690395`*^9}, {3.8947315273242245`*^9, 
+   3.8947315348989105`*^9}, {3.8947315682555227`*^9, 3.894731715874343*^9}, {
+   3.8947318118940325`*^9, 3.8947320230400257`*^9}, {3.8947320532148027`*^9, 
+   3.8947322158025208`*^9}, {3.8947322524152317`*^9, 
+   3.8947322552773337`*^9}, {3.894732598444689*^9, 3.894732598884663*^9}, {
+   3.8947327483644624`*^9, 3.8947327516599035`*^9}, {3.894732792152816*^9, 
+   3.894732792552809*^9}, {3.894734281705374*^9, 3.89473428815142*^9}, {
+   3.894738618540986*^9, 3.8947386192045193`*^9}, {3.8949850609022655`*^9, 
+   3.894985061512225*^9}, {3.8964801733749743`*^9, 3.896480198702397*^9}, {
+   3.8964802808148665`*^9, 3.896480280924858*^9}, {3.896480356176319*^9, 
+   3.8964803565662956`*^9}, {3.9068319193284383`*^9, 3.906831919731374*^9}, 
+   3.906836823836317*^9, 3.9068369024861298`*^9},
+ CellLabel->
+  "In[117]:=",ExpressionUUID->"0fb32f54-b3bc-4a21-985e-5618de61c111"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of dice faces: \"\>", "\[InvisibleSpace]", "500"}],
+  SequenceForm["Number of dice faces: ", 500],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.906837870358226*^9},
+ CellLabel->
+  "During evaluation of \
+In[117]:=",ExpressionUUID->"694b1752-51e0-4aa4-9b4b-db78871abfba"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of MAXIMAL hitting rounds: \"\>", "\[InvisibleSpace]", 
+   "50"}],
+  SequenceForm["Number of MAXIMAL hitting rounds: ", 50],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.906837870358226*^9},
+ CellLabel->
+  "During evaluation of \
+In[117]:=",ExpressionUUID->"b413b11f-abdb-48d6-91d6-cbeaf41abfef"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Expected stopping round: \"\>", "\[InvisibleSpace]", 
+   "6.890392751431070678660216895700466222192061441224003463824635578761226535\
+66423`50."}],
+  SequenceForm[
+  "Expected stopping round: ", 
+   6.8903927514310706786602168957004662221920614412240034638246355787612265356\
+6423`50.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.906842476282051*^9},
+ CellLabel->
+  "During evaluation of \
+In[117]:=",ExpressionUUID->"60bbee82-25e3-4665-8c40-98334cf3ddc8"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"log(DiceFace): \"\>", "\[InvisibleSpace]", 
+   "6.2146080984221917426`10."}],
+  SequenceForm["log(DiceFace): ", 6.2146080984221917426`10.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.906842476282051*^9},
+ CellLabel->
+  "During evaluation of \
+In[117]:=",ExpressionUUID->"fd320710-2918-4f50-b266-cd8f929f52aa"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", 
+    RowBox[{"x", ",", "t"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DiceFace", "=", "1000"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRule", "=", "PrimeQ"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HitRoundMax", "=", "50"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Number of dice faces: \>\"", ",", "DiceFace"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Number of MAXIMAL hitting rounds: \>\"", ",", "HitRoundMax"}], "]"}],
+    ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf1", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gf2", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", "DiceFace"}], ",", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"HitRule", "[", "i", "]"}], ",", 
+       RowBox[{"gf1", "=", 
+        RowBox[{"gf1", "+", 
+         SuperscriptBox["x", "i"]}]}], ",", 
+       RowBox[{"gf2", "=", 
+        RowBox[{"gf2", "+", 
+         SuperscriptBox["x", "i"]}]}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GFInitial", "=", 
+   RowBox[{"gf1", "+", "gf2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GF1", "=", 
+   RowBox[{"Append", "[", 
+    RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GF2", "=", 
+    RowBox[{"Append", "[", 
+     RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"HitRound", "=", "2"}], ",", 
+     RowBox[{"HitRound", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"HitRound", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"gf1", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf2", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gf", "=", 
+       RowBox[{"Expand", "[", 
+        RowBox[{"GFInitial", "*", 
+         RowBox[{"GF2", "[", 
+          RowBox[{"[", 
+           RowBox[{"HitRound", "-", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "HitRound"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{"HitRound", "*", "DiceFace"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"HitRule", "[", "i", "]"}], ",", 
+           RowBox[{"gf1", "=", 
+            RowBox[{"gf1", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}], ",", 
+           RowBox[{"gf2", "=", 
+            RowBox[{"gf2", "+", 
+             RowBox[{
+              RowBox[{"Coefficient", "[", 
+               RowBox[{"gf", ",", "x", ",", "i"}], "]"}], "*", 
+              SuperscriptBox["x", "i"]}]}]}]}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF1", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF1", ",", "gf1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GF2", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"GF2", ",", "gf2"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HitExpectation", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", "=", "1"}], ",", 
+     RowBox[{"k", "\[LessEqual]", "HitRoundMax"}], ",", 
+     RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HitExpectation", "=", 
+       RowBox[{"HitExpectation", "+", 
+        RowBox[{"k", "*", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           FractionBox["1", "DiceFace"], ")"}], "k"], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"GF1", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{"x", "\[Rule]", "1"}], "}"}]}], ")"}]}]}]}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Expected stopping round: \>\"", ",", 
+     RowBox[{"N", "[", 
+      RowBox[{"HitExpectation", ",", "50"}], "]"}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<log(DiceFace): \>\"", ",", 
+    RowBox[{"N", "[", 
+     RowBox[{
+      RowBox[{"Log", "[", "DiceFace", "]"}], ",", "10"}], "]"}]}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8947310301498785`*^9, 3.894731035740474*^9}, {
+   3.894731340440172*^9, 3.8947314623690395`*^9}, {3.8947315273242245`*^9, 
+   3.8947315348989105`*^9}, {3.8947315682555227`*^9, 3.894731715874343*^9}, {
+   3.8947318118940325`*^9, 3.8947320230400257`*^9}, {3.8947320532148027`*^9, 
+   3.8947322158025208`*^9}, {3.8947322524152317`*^9, 
+   3.8947322552773337`*^9}, {3.894732598444689*^9, 3.894732598884663*^9}, {
+   3.8947327483644624`*^9, 3.8947327516599035`*^9}, {3.894732792152816*^9, 
+   3.894732792552809*^9}, {3.894734281705374*^9, 3.8947342972569375`*^9}, {
+   3.894734791196906*^9, 3.8947347952956276`*^9}, {3.894759163204854*^9, 
+   3.8947591638048506`*^9}, {3.8968737257668076`*^9, 
+   3.8968737262368035`*^9}, {3.9068319233158693`*^9, 3.906831923735862*^9}, 
+   3.906836828287191*^9, 3.9068369068489814`*^9},
+ CellLabel->
+  "In[136]:=",ExpressionUUID->"3a9f4ff3-9a2e-4dba-8c55-47142710cba7"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of dice faces: \"\>", "\[InvisibleSpace]", "1000"}],
+  SequenceForm["Number of dice faces: ", 1000],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068424763220005`*^9},
+ CellLabel->
+  "During evaluation of \
+In[136]:=",ExpressionUUID->"4447f13e-a2a5-4d78-9dc6-a722c668b25f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of MAXIMAL hitting rounds: \"\>", "\[InvisibleSpace]", 
+   "50"}],
+  SequenceForm["Number of MAXIMAL hitting rounds: ", 50],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9068424763220005`*^9},
+ CellLabel->
+  "During evaluation of \
+In[136]:=",ExpressionUUID->"81771c1c-1ce0-4402-a7bd-6fe1f34947a9"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Expected stopping round: \"\>", "\[InvisibleSpace]", 
+   "7.592590645187828357689321080932380361566122537771107787757589643435205301\
+02004`50."}],
+  SequenceForm[
+  "Expected stopping round: ", 
+   7.5925906451878283576893210809323803615661225377711077877575896434352053010\
+2004`50.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.906863261532077*^9},
+ CellLabel->
+  "During evaluation of \
+In[136]:=",ExpressionUUID->"b3d567b8-520f-4aac-a6d4-a34c162642bc"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"log(DiceFace): \"\>", "\[InvisibleSpace]", 
+   "6.9077552789821370521`10."}],
+  SequenceForm["log(DiceFace): ", 6.9077552789821370521`10.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.906863261532077*^9},
+ CellLabel->
+  "During evaluation of \
+In[136]:=",ExpressionUUID->"1a72c02f-a42f-401e-b572-6a98339ccca3"]
+}, Open  ]]
+}, Open  ]]
+},
+PrintingStyleEnvironment->"Printout",
+WindowSize->{759, 573},
+WindowMargins->{{198, Automatic}, {58, Automatic}},
+ShowSyntaxStyles->True,
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 399, 7, 48, "Input",ExpressionUUID->"acefd0e0-aec0-4ef1-b126-d7c0378947e2"],
+Cell[CellGroupData[{
+Cell[982, 31, 6630, 173, 951, "Input",ExpressionUUID->"7690e84e-de56-4002-bcd8-a31a5769d3d7"],
+Cell[CellGroupData[{
+Cell[7637, 208, 403, 9, 22, "Print",ExpressionUUID->"a609f7b4-e362-4fde-8264-c928aab778ca"],
+Cell[8043, 219, 433, 10, 22, "Print",ExpressionUUID->"c20d35e5-c3cf-4703-82ca-837ce8dd2eb3"],
+Cell[8479, 231, 395, 7, 41, "Print",ExpressionUUID->"814a2503-ac98-45bc-8743-9925680eaa44"],
+Cell[8877, 240, 588, 14, 22, "Print",ExpressionUUID->"dec0ca4b-3f1e-400f-8857-bc862fb8dbbc"],
+Cell[9468, 256, 482, 11, 22, "Print",ExpressionUUID->"d02a0bdb-2371-41c4-804a-39a716f104eb"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9999, 273, 6340, 166, 875, "Input",ExpressionUUID->"20654e72-8470-4616-bbb5-4efb2841f7e4"],
+Cell[CellGroupData[{
+Cell[16364, 443, 424, 9, 22, "Print",ExpressionUUID->"d98e3721-780c-47c5-a320-72eb279462c0"],
+Cell[16791, 454, 452, 10, 22, "Print",ExpressionUUID->"ae8f290f-1893-4fe1-b7ca-947ca435de72"],
+Cell[17246, 466, 547, 12, 22, "Print",ExpressionUUID->"9fdeb802-bb32-40b4-8098-690414e7e8e6"],
+Cell[17796, 480, 496, 10, 22, "Print",ExpressionUUID->"f6b72728-c159-445a-9f0d-006cd8cdf42b"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18341, 496, 6284, 165, 875, "Input",ExpressionUUID->"31582b4a-10b9-4c5e-93f3-8be7a38d6f08"],
+Cell[CellGroupData[{
+Cell[24650, 665, 403, 9, 22, "Print",ExpressionUUID->"08b6f05f-4b1b-4576-adc1-20674fd29a83"],
+Cell[25056, 676, 431, 10, 22, "Print",ExpressionUUID->"5b9fdd4c-5756-4bfa-b43f-845ba8ca8b34"],
+Cell[25490, 688, 584, 14, 22, "Print",ExpressionUUID->"10c9eac6-99fb-4a08-87ca-4cd2c16dc748"],
+Cell[26077, 704, 478, 11, 22, "Print",ExpressionUUID->"1a1e081e-1c32-4054-8d8d-a559cb9994c3"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26604, 721, 6334, 166, 875, "Input",ExpressionUUID->"7e92f6c5-26dc-4e28-8b94-fd9a43c90a60"],
+Cell[CellGroupData[{
+Cell[32963, 891, 404, 9, 22, "Print",ExpressionUUID->"a2ee2ed7-8aa2-4ab8-947e-0b3b20e3aacd"],
+Cell[33370, 902, 432, 10, 22, "Print",ExpressionUUID->"5e881577-5724-4f15-a3d0-67cd8344d70e"],
+Cell[33805, 914, 585, 14, 22, "Print",ExpressionUUID->"9680af3a-a835-400f-a1d8-d149a982b27e"],
+Cell[34393, 930, 479, 11, 22, "Print",ExpressionUUID->"63346d10-1485-4ea9-bb8c-2e81997fd9db"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34921, 947, 6337, 166, 875, "Input",ExpressionUUID->"5d947b78-bca5-42fe-af70-07496aa7ece9"],
+Cell[CellGroupData[{
+Cell[41283, 1117, 333, 8, 22, "Print",ExpressionUUID->"5b8d292f-e07a-4bb1-b826-07b4c124fea2"],
+Cell[41619, 1127, 359, 9, 22, "Print",ExpressionUUID->"ec2fcda6-abc1-4c60-b27e-ec5e0035daea"],
+Cell[41981, 1138, 514, 13, 22, "Print",ExpressionUUID->"d0a6f6c2-b81a-4601-a50a-ab0f6cfd6c11"],
+Cell[42498, 1153, 365, 9, 22, "Print",ExpressionUUID->"434d5f48-de60-4154-a2a6-818a37f08af9"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42912, 1168, 6336, 166, 875, "Input",ExpressionUUID->"dae7ca11-611e-4950-b8e5-ebe5d14f07d4"],
+Cell[CellGroupData[{
+Cell[49273, 1338, 331, 8, 22, "Print",ExpressionUUID->"3745b311-3936-443c-8360-7e5aa0f05fa9"],
+Cell[49607, 1348, 357, 9, 22, "Print",ExpressionUUID->"f2acbf70-f0cd-46fd-8996-7b545d966839"],
+Cell[49967, 1359, 510, 13, 22, "Print",ExpressionUUID->"3dc62e8e-c5c2-4eaa-98c4-09f9346b3a3d"],
+Cell[50480, 1374, 365, 9, 22, "Print",ExpressionUUID->"c5c697b5-3353-41d8-86e4-c1d09ac964f5"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50894, 1389, 6341, 167, 875, "Input",ExpressionUUID->"0fb32f54-b3bc-4a21-985e-5618de61c111"],
+Cell[CellGroupData[{
+Cell[57260, 1560, 332, 8, 22, "Print",ExpressionUUID->"694b1752-51e0-4aa4-9b4b-db78871abfba"],
+Cell[57595, 1570, 358, 9, 22, "Print",ExpressionUUID->"b413b11f-abdb-48d6-91d6-cbeaf41abfef"],
+Cell[57956, 1581, 513, 13, 22, "Print",ExpressionUUID->"60bbee82-25e3-4665-8c40-98334cf3ddc8"],
+Cell[58472, 1596, 366, 9, 22, "Print",ExpressionUUID->"fd320710-2918-4f50-b266-cd8f929f52aa"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58887, 1611, 6247, 166, 907, "Input",ExpressionUUID->"3a9f4ff3-9a2e-4dba-8c55-47142710cba7"],
+Cell[CellGroupData[{
+Cell[65159, 1781, 336, 8, 22, "Print",ExpressionUUID->"4447f13e-a2a5-4d78-9dc6-a722c668b25f"],
+Cell[65498, 1791, 360, 9, 22, "Print",ExpressionUUID->"81771c1c-1ce0-4402-a7bd-6fe1f34947a9"],
+Cell[65861, 1802, 513, 13, 22, "Print",ExpressionUUID->"b3d567b8-520f-4aac-a6d4-a34c162642bc"],
+Cell[66377, 1817, 366, 9, 22, "Print",ExpressionUUID->"1a72c02f-a42f-401e-b572-6a98339ccca3"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
